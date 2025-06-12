@@ -12,12 +12,13 @@ use App\Http\Middleware\CheckCourseAccess;
 use App\Http\Controllers\SeasonsEpisodesController;
 
 Route::view('/', 'welcome');
+Route::middleware(['guest'])->get('/register', RegisterForm::class)->name('register');
 Route::middleware(['guest'])->get('/login', Login::class)->name('login');
 Route::middleware(['auth'])->group(function () {
     Route::get('dashboard', [Dashboard::class, 'index'])->name('dashboard');
-});
 
-Route::get('/register', RegisterForm::class)->name('register');
+
+
 
 
 Route::get('/view-pdf/{filename}', [PDFController::class, 'view'])->name('pdf.view');
@@ -58,4 +59,8 @@ Route::get('/user-roles/{id?}', [UserController::class, 'editRole'])->name('user
 Route::get('/users', [UserController::class, 'index'])->name('users');
 
 
+Route::get('profile', [UserController::class, 'showProfile'])->name('profile');
+Route::get('profile/edit', [UserController::class, 'editProfile'])->name('profile.edit');
+Route::get('profile/{profile}/edit', [UserController::class, 'updateProfile'])->name('profile.update');
+});
 //require __DIR__.'/auth.php';

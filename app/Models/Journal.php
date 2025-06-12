@@ -9,6 +9,7 @@ class Journal extends Model
     //
     protected $fillable = [
         'name',
+        'user_id',
         'church_name',
         'season',
         'bible_story',

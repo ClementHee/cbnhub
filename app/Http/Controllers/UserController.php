@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -70,6 +72,23 @@ class UserController extends Controller
     public function editRole($id){
 
         return view('pages.user.user-roles', compact('id'));
+    }
+
+    public function showProfile()
+    {
+        $user = Auth::user();
+        return view('pages.user.profile', compact('user'));
+    }
+    public function editProfile()
+    {
+       
+        return view('pages.user.edit-profile', compact('user'));
+    }
+    
+    public function updateProfile(Request $request, User $user)
+    {
+        $user->update($request->all());
+        return redirect()->route('profile')->with('success', 'Profile updated successfully.');
     }
 
     //** permission:read tpp/read super5/read sba*/

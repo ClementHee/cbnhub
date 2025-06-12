@@ -28,6 +28,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'supertokens_id',
 
     ];
 
@@ -93,4 +94,28 @@ class User extends Authenticatable
                     })
                     ->exists();
     }
+
+    // Get the user's SuperTokens ID
+    public function getSupertokensId(): ?string
+    {
+        return $this->supertokens_id;
+    }
+
+    // Set the user's SuperTokens ID    
+    public function setSupertokensId(string $supertokensId): void
+    {
+        $this->supertokens_id = $supertokensId;
+        $this->save();
+    }
+    // Define the relationship with UsersTracking
+    public function trackings()
+    {
+        return $this->hasMany(UsersTracking::class, 'user_id');
+    }
+    // Get the latest tracking record for the user
+    public function latestTracking()
+    {
+        return $this->trackings()->latest()->first();
+    }
+    
 }

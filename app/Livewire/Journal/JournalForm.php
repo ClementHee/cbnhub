@@ -8,6 +8,7 @@ use App\Models\Season;
 use App\Models\Journal;
 use Livewire\Component;
 use function Livewire\store;
+use Illuminate\Support\Facades\Auth;
 
 class JournalForm extends Component
 {
@@ -98,10 +99,10 @@ class JournalForm extends Component
              // Adjust as needed
         ]);
 
-
         $saved = Journal::create([
             'name' => $this->name,
             'church_name' => $this->church_name,
+            'user_id' => Auth::user()->id,
             'season' => $this->season,
             'bible_story' => $this->bible_story,
             'lesson' => $this->lesson,
