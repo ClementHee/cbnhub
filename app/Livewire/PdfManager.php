@@ -11,9 +11,15 @@ class PdfManager extends Component
     use WithFileUploads;
 
     public $pdfFile;
+    public $ep;
     public $currentPdf = null;
     public $preview = false;
     public $path;
+
+    public function mount()
+    {
+        $ep = $this->ep;
+    }
     public function submit()
     {
         
@@ -23,7 +29,7 @@ class PdfManager extends Component
 
 
 
-        $this->pdfFile->storeAs('pdfs', $this->pdfFile->getClientOriginalName(), 'public');
+        $this->pdfFile->storeAs('pdfs', 'ep'.$this->ep.$this->pdfFile->getClientOriginalName(), 'public');
 
         $this->reset('pdfFile');
         session()->flash('success', 'PDF uploaded successfully!');

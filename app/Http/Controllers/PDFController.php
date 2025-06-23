@@ -8,6 +8,7 @@ class PDFController extends Controller
 {
     public function view($filename)
     {
+     
         $path = storage_path("app/public/pdfs/{$filename}");
 
 

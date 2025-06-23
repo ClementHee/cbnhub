@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\CourseSection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -57,5 +58,23 @@ class Course extends Model
         })->with(['cohorts'])->get();
     }
 
+    public function getCourseSections()
+    {
+        return $this->hasMany(CourseSection::class);
+    }
+
+    public function sectionMaterials()
+    {
+        return $this->hasManyThrough(
+            SectionMaterial::class,
+            CourseSection::class,
+            'course_id', // Foreign key on CourseSection
+            'course_section_id', // Foreign key on SectionMaterial
+            'id', // Local key on Course
+            'id' // Local key on CourseSection
+        );
+    }
+
+    
     
 }

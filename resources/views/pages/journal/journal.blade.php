@@ -15,13 +15,13 @@
                                 Create New Journal Entry
                             </a>
                         </button>
-                    <table class="w-full text-left table-auto min-w-max text-slate-800 px-4 py-4">
+                    <table class="w-full text-left table-auto min-w-max text-slate-800 ">
                         <thead>
                             <tr class="text-slate-500 border-b border-slate-300 bg-slate-50">
-                                <th class="py-4">Name</th>
-                                <th class="py-4">Church Name</th>
-                                <th class="py-4">Submitted At</th>
-                                <th class="py-4">Actions</th>
+                                <th class="px-2 py-4">Name</th>
+                                <th class="px-2 py-4">Church Name</th>
+                                <th class="px-2 py-4">Submitted At</th>
+                                <th class="px-2 py-4">Actions</th>
                             </tr>
                         </thead>
                         <tbody>

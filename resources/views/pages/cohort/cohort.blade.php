@@ -6,12 +6,27 @@
     </x-slot>
 
 
-<div class="container">
-    <h1 class="mb-4">Cohorts</h1>
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4">
-        <a href="{{ route('cohort.create') }}" class="text-white hover:text-white">Create Cohort</a>
-    </button>
-<div class="relative flex flex-col w-full h-full  text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Dashboard') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900 dark:text-gray-100">
+                   <div class="flex items-center mb-4">
+                        <h1 >Cohorts</h1>
+                    
+                        <a href="{{ route('cohort.create') }}">
+                            <button class="ml-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                Create Cohort
+                            </button>
+                        </a>
+                    </div>
+                   
+    <div class="relative flex flex-col w-full h-full  text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
 
     <table class="w-full text-left table-auto min-w-max text-slate-800 px-4 py-4">
         <thead>
@@ -25,7 +40,7 @@
         </thead>
         <tbody>
             @forelse($cohorts as $cohort)
-                <tr wire:key ="{{ $cohort->id }}" class="border-b border-slate-200 hover:bg-slate-100">
+                <tr wire:key ="{{ $cohort->id }}" class="border-b border-slate-200 ">
                     <td>{{ $cohort->name }}</td>
                     <td>{{ $cohort->description }}</td>
                     <td class="text-center">
@@ -35,7 +50,7 @@
                             <span class="text-red-500 font-semibold">Inactive</span>
                         @endif
                     </td>
-                    <td class="flex justify-center items-center space-x-2">
+                    <td class="flex justify-center items-center space-x-2 py-2">
                         <button class="text-white bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">
                             <a href="{{ route('cohort.edit', $cohort->id) }}">Edit</a>
                         </button>
@@ -43,7 +58,7 @@
                         <form action="{{ route('cohort.destroy', $cohort->id) }}" method="POST" class="inline-block">
                             @csrf
                             @method('DELETE')
-                          <button type="submit" class="!bg-red-500 hover:!bg-red-700 text-white font-semibold py-2 px-4 rounded">Delete</button>
+                          <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">Delete</button>
                         </form>
 
                         <button class="text-white bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ">
@@ -60,6 +75,9 @@
         </tbody>
     </table>
     </div>
-    
-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </x-app-layout>

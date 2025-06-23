@@ -22,7 +22,7 @@
                     <div class="w-full py-6">
                         <div class="w-full px-3">
                             <h2 class="text-lg font-semibold mb-4">Change Password</h2>
-                                
+                                @livewire('password-update-form', ['users' => $user])
                                
                         </div>
                     </div>

@@ -66,7 +66,9 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('users')->with('success', 'User deleted successfully.');
+
     }
 
     public function editRole($id){

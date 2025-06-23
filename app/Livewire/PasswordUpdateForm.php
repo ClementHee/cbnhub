@@ -8,9 +8,9 @@ use Livewire\Component;
 class PasswordUpdateForm extends Component
 {
     public $user;
-    public $currentPassword;
-    public $newPassword;
-    public $confirmPassword;
+    public $current_password;
+    public $new_password;
+    public $new_password_confirmation;
     public $users;
     public $passwordUpdated = false;
     public $passwordUpdateError = false;
@@ -18,32 +18,36 @@ class PasswordUpdateForm extends Component
     public $passwordUpdateErrorMessage = '';
     public function mount()
     {
+        
         $this->user = $this->users;
     }
     public function updatePassword()
     {
+             
         $this->validate([
-            'currentPassword' => 'required|string',
-            'newPassword' => 'required|string|min:8|confirmed',
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:8|confirmed',
         ]);
-
-        if (!Hash::check($this->currentPassword, $this->user->password)) {
+   
+        if (!Hash::check($this->current_password, $this->user->password)) {
+     
             $this->passwordUpdateError = true;
             $this->passwordUpdateErrorMessage = 'Current password is incorrect.';
             return;
         }
 
-        $this->user->password = Hash::make($this->newPassword);
-        $this->user->save();
+        $this->user->password = Hash::make($this->new_password);
 
+        $this->user->save();
+        $this->resetForm();
         $this->passwordUpdated = true;
         $this->passwordUpdateMessage = 'Password updated successfully.';
     }
     public function resetForm()
     {
-        $this->currentPassword = '';
-        $this->newPassword = '';
-        $this->confirmPassword = '';
+        $this->current_password = '';
+        $this->new_password = '';
+        $this->new_password_confirmation = '';
         $this->passwordUpdated = false;
         $this->passwordUpdateError = false;
         $this->passwordUpdateMessage = '';

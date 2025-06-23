@@ -6,20 +6,61 @@ use App\Models\Course;
 use App\Models\Season;
 use Illuminate\Http\Request;
 use App\Models\CourseTracking;
+use App\Models\SectionMaterial;
 use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
+
+     public $pdfFile;
+    public $ep;
+    public $currentPdf = null;
+    public $preview = false;
+       public $previewVid = false;
+        public $currentVid ;
+        public $prevUrl ;
+
+    public $path;
+    public string $upload_type = '';
+    public $order;
+    public $file_category;
+    public $file_path;
+    public $file_name;
+
+    public $video_title;
+    public $brightcove_url;
+    public $course_section_id;
+    public string $url = '';
+    public ?string $iframeHtml = null;
+
+    public function previewPDF($pdf){
+        $this->preview = true;
+        $this->currentPdf = $pdf;
+        $this->path = storage_path("app/pdfs/{$pdf}");
+ 
+
+    }
+
+    public function previewVideos($url){
+
+        $this->previewVid = true;
+        $this->currentVid = $url;
+        $this->prevUrl = $url;
+
+    }
     
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(int $s)
     {
-        $seasons = Season::all();
-        $courses = Course::all();
+
+        
+
+        $courses = Course::where('season_id', $s)
+            ->get();
        
-        return view('pages.course.course',compact('seasons','courses'));
+        return view('pages.course.course',compact('courses', 's'));
     }
 
     /**
@@ -43,6 +84,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
+   
         //
         $course = Course::findOrFail($course->id);
 
@@ -102,6 +144,11 @@ class CourseController extends Controller
 
     public function seeMyCourses(Course $mycourses){
 
+        $materials =$mycourses->sectionMaterials()->get();
+        $sections = $mycourses->getCourseSections()->get();
+     
+
+     
         
         $season = Season::findOrFail($mycourses->season_id);
    
@@ -112,7 +159,7 @@ class CourseController extends Controller
             'course_id' => $course->id,
         ]);
        
-        return view('pages.course.my-course-view', compact('course','season'));
+        return view('pages.course.my-course-view', compact('course','season', 'materials','sections'));
     }
 
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cohort;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class Dashboard extends Controller
@@ -11,7 +13,17 @@ class Dashboard extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        // This method can be used to fetch and display data for the dashboard.
+        $userCount = User::count();
+        $cohortCount = Cohort::count();
+        $cohortNotAssigned = Cohort::whereDoesntHave('courses')->get();
+      
+
+        return view('dashboard', [
+            'userCount' => $userCount,
+            'cohortCount' => $cohortCount,
+            'cohortNotAssigned' => $cohortNotAssigned,
+        ]   );
     }
 
     /**

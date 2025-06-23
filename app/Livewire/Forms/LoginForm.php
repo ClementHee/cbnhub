@@ -2,44 +2,71 @@
 
 namespace App\Livewire\Forms;
 
-use Livewire\Form;
-use Illuminate\Support\Str;
-use Livewire\Attributes\Validate;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Livewire\Attributes\Validate;
+use Livewire\Form;
 
 class LoginForm extends Form
 {
+    #[Validate('required|string|email')]
     public string $email = '';
+
+    #[Validate('required|string')]
     public string $password = '';
 
-    public function login()
-    {
-        $response = Http::withHeaders([
-            'Content-Type' => 'application/json'
-        ])->withOptions([
-            'verify' => false, // only for local dev
-        ])->post('http://localhost:3001/auth/signin', [
-            'formFields' => [
-                ['id' => 'email', 'value' => $this->email],
-                ['id' => 'password', 'value' => $this->password],
-            ]
-        ]);
+    #[Validate('boolean')]
+    public bool $remember = false;
 
-        if ($response->successful()) {
-            $userId = $response->json('user.id');
-            session(['user_id' => $userId]);
-            return redirect()->to('/dashboard');
+    /**
+     * Attempt to authenticate the request's credentials.
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function authenticate(): void
+    {
+        $this->ensureIsNotRateLimited();
+
+        if (! Auth::attempt($this->only(['email', 'password']), $this->remember)) {
+            RateLimiter::hit($this->throttleKey());
+
+            throw ValidationException::withMessages([
+                'form.email' => trans('auth.failed'),
+            ]);
         }
 
-        $this->addError('email', $response->json('message') ?? 'Login failed.');
+        RateLimiter::clear($this->throttleKey());
     }
 
-    public function render()
+    /**
+     * Ensure the authentication request is not rate limited.
+     */
+    protected function ensureIsNotRateLimited(): void
     {
-        return view('livewire.login-form');
+        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+            return;
+        }
+
+        event(new Lockout(request()));
+
+        $seconds = RateLimiter::availableIn($this->throttleKey());
+
+        throw ValidationException::withMessages([
+            'form.email' => trans('auth.throttle', [
+                'seconds' => $seconds,
+                'minutes' => ceil($seconds / 60),
+            ]),
+        ]);
+    }
+
+    /**
+     * Get the authentication rate limiting throttle key.
+     */
+    protected function throttleKey(): string
+    {
+        return Str::transliterate(Str::lower($this->email).'|'.request()->ip());
     }
 }

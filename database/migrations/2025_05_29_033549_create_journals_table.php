@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('journals', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')->constrained()->onDelete('cascade');;
+            $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('church_name');
             $table->foreignId('season')->constrained('seasons')->onDelete('cascade');

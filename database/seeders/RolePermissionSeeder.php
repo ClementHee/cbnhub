@@ -20,7 +20,7 @@ class RolePermissionSeeder extends Seeder
         Role::create(['abbr' => 'HF', 'name' => 'Head Facilitator']);
         //Jan, April, July, October
         
-        Permission::create(['name' => 'user.assign-role']);
+        /**Permission::create(['name' => 'user.assign-role']);
         Permission::create(['name' => 'user.assign-permission']);
         Permission::create(['name' => 'can-view-S1']);
             Permission::create(['name' => 'can-view-S1QJan']);
@@ -50,7 +50,7 @@ class RolePermissionSeeder extends Seeder
             Permission::create(['name' => 'can-view-S5QJan']);
             Permission::create(['name' => 'can-view-S5QApr']);
             Permission::create(['name' => 'can-view-S5QJul']);
-            Permission::create(['name' => 'can-view-S5QOct']);
+            Permission::create(['name' => 'can-view-S5QOct']);**/
     
     }
 }
