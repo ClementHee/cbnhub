@@ -15,7 +15,8 @@
                                 Create New Journal Entry
                             </a>
                         </button>
-                    <table class="w-full text-left table-auto min-w-max text-slate-800 ">
+                        <livewire:journal-table/>
+                    {{--<table class="w-full text-left table-auto min-w-max text-slate-800 ">
                         <thead>
                             <tr class="text-slate-500 border-b border-slate-300 bg-slate-50">
                                 <th class="px-2 py-4">Name</th>
@@ -25,7 +26,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($journals as $journal)
+                           {{-- @foreach($journals as $journal)
                                 <tr>
                                     <td class="">{{ $journal->name }}</td>
                                     <td class="">{{ $journal->church_name }}</td>
@@ -33,16 +34,16 @@
                                     <td class="">
                                         <a href="{{ route('journal.show', $journal->id) }}" class="text-blue-500 hover:underline">View</a>
                                     
-                                        <form action="{{ route('journal.destroy', $journal->id) }}" method="POST" class="inline-block ml-2">
+                                        <form action="{{ route('journal.destroy', $journal->id) }}"       method="POST" class="inline-block ml-2">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-500 hover:underline">Delete</button>
+                                            <button type="submit" class="text-red-500 hover:underline" data-confirm-delete="true">Delete</button>
                                         </form>
 
                                 </tr>
                             @endforeach
                         </tbody>
-                    </table>
+                    </table>--}}
                 </div>
             </div>
         </div>

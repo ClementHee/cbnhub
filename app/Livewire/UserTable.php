@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\CourseSection;
+use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use PowerComponents\LivewirePowerGrid\Button;
@@ -12,15 +12,12 @@ use PowerComponents\LivewirePowerGrid\Facades\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 
-final class CourseSectionTable extends PowerGridComponent
+final class UserTable extends PowerGridComponent
 {
-    public int $courseId;
-    protected $listeners = ['deleteSection'];
-    public string $tableName = 'course-section-table-lftz6w-table';
+    public string $tableName = 'user-table-5rjik0-table';
 
     public function setUp(): array
     {
-    
         $this->showCheckBox();
 
         return [
@@ -34,9 +31,7 @@ final class CourseSectionTable extends PowerGridComponent
 
     public function datasource(): Builder
     {
-
-        return CourseSection::query() 
-            ->where('course_id', $this->courseId);
+        return User::query()->with('roles');
     }
 
     public function relationSearch(): array
@@ -48,41 +43,40 @@ final class CourseSectionTable extends PowerGridComponent
     {
         return PowerGrid::fields()
 
-            ->add('course_id')
-            ->add('lesson_title')
-            ->add('super_truth')
-            ->add('super_verse')
-            ->add('bible_story')
-            ->add('created_at');
+            ->add('name')
+            ->add('email')
+            ->add('supertokens_id')
+            ->add('created_at')
+            ->add('role_names', fn($user) => $user->roles->pluck('name')->join(', '));
     }
 
     public function columns(): array
     {
         return [
-            Column::make('Id', 'id'),
-            Column::make('Course id', 'course_id'),
-            Column::make('Lesson title', 'lesson_title')
+
+
+            Column::make('Name', 'name')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Super truth', 'super_truth')
+            Column::make('Email', 'email')
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Super verse', 'super_verse')
-                ->sortable()
-                ->searchable(),
 
-            Column::make('Bible story', 'bible_story')
-                ->sortable()
-                ->searchable(),
+
 
 
             Column::make('Created at', 'created_at')
                 ->sortable()
                 ->searchable(),
-
+            Column::add()
+                ->title('Roles')
+                ->field('role_names')
+                ->sortable(),
             Column::action('Action')
+
+
         ];
     }
 
@@ -97,36 +91,39 @@ final class CourseSectionTable extends PowerGridComponent
         $this->js('alert(' . $rowId . ')');
     }
 
-    public function actions(CourseSection $row): array
+    public function actions(User $row): array
     {
         return [
             Button::add('edit')
                 ->slot('Edit')
                 ->id()
                 ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-                ->route('section.edit', ['courseSection' => $row->id]),
+                ->route('user-roles', ['id' => $row->id]),
 
-            Button::add('destroy')
+            Button::add('delete')
                 ->slot('Delete')
-                ->id()
-                ->class('text-red-600')
-                ->dispatchTo(
-                    component: 'course-section-table',
-                    event: 'deleteSection',
-                    params: ['data' => $row->id]
-                )
+                ->class('text-red-600 cursor-pointer')
+                ->dispatch('confirmDelete', ['id' => $row->id]),
         ];
     }
 
-    public function deleteSection($data)
+    protected function getListeners()
     {
+        return array_merge(
+            parent::getListeners(),
+            [
+                'delete' => 'delete',
+                'edit' => 'edit'
+            ]
 
-        CourseSection::findOrFail($data)->delete();
-
-        $this->refresh(); // ✅ refresh the PowerGrid table
-        session()->flash('success', 'Section deleted successfully.');
+        );
     }
 
+    public function delete($id)
+    {
+        User::findOrFail($id)->delete();
+        $this->dispatch('swal:deleted');
+    }
 
     /*
     public function actionRules($row): array

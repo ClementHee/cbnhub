@@ -10,6 +10,7 @@ class Course extends Model
 {
     //
     protected $fillable = [
+        'id',
         'name',
         'description',
         'season_id',
@@ -72,7 +73,7 @@ class Course extends Model
             'course_section_id', // Foreign key on SectionMaterial
             'id', // Local key on Course
             'id' // Local key on CourseSection
-        );
+        )->orderBy('order', 'asc');
     }
 
     

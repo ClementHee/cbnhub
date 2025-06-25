@@ -11,7 +11,7 @@ class JournalController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {  
         $journals = Journal::all();
         return view ('pages.journal.journal', compact('journals'));
     }
@@ -61,6 +61,7 @@ class JournalController extends Controller
      */
     public function destroy(Journal $journal)
     {
+      
         $journal->delete();
         return redirect()->route('journals')->with('success', 'Journal deleted successfully.');
     }

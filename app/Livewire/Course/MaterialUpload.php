@@ -118,8 +118,8 @@ class MaterialUpload extends Component
 
     public function render()
     {
-        $videos= SectionMaterial::where('course_section_id', $this->ep)->where('upload_type','video')->get();
-        $pdfs= SectionMaterial::where('course_section_id', $this->ep)->where('upload_type','pdf')->get();
+        $videos= SectionMaterial::where('course_section_id', $this->ep)->where('upload_type','video')->orderBy('order')->get();
+        $pdfs= SectionMaterial::where('course_section_id', $this->ep)->where('upload_type','pdf')->orderBy('order')->get();
         //$pdfs = collect(Storage::disk('public')->files('pdfs'))->map(fn($f) => basename($f));
 
         return view('livewire.course.material-upload',compact('pdfs','videos'));

@@ -16,19 +16,20 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                   <div class="flex items-center mb-4">
-                        <h1 >Cohorts</h1>
-                    
+                    <div class="flex items-center mb-4">
+                        <h1>Cohorts</h1>
+
                         <a href="{{ route('cohort.create') }}">
                             <button class="ml-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                 Create Cohort
                             </button>
                         </a>
                     </div>
-                   
-    <div class="relative flex flex-col w-full h-full  text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
 
-    <table class="w-full text-left table-auto min-w-max text-slate-800 px-4 py-4">
+                    <div
+                       >
+                        <livewire:cohort-table />
+                        {{-- <table class="w-full text-left table-auto min-w-max text-slate-800 px-4 py-4">
         <thead>
             <tr class="text-slate-500 border-b border-slate-300 bg-slate-50">
                 <th class="p-4 text-center">Cohort Name</th>
@@ -73,8 +74,8 @@
                 </tr>
             @endforelse
         </tbody>
-    </table>
-    </div>
+    </table> --}}
+                    </div>
                 </div>
             </div>
         </div>

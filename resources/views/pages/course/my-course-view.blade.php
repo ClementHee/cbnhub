@@ -11,10 +11,6 @@
         This button is only visible to users with the 'Super Admin' role.
         It links to the route for assigning a cohort to the course.
       --}}
-            <button class="mb-4 px-4 py-2">
-                {{-- Button content here --}}
-            </button>
-
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex">
                 <div class="w-1/3">
                     <img src="{{ asset('assets/img/thumbnails/' . $course->id . '.png') }}" alt="Course Image"
@@ -41,26 +37,48 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                     <h1>{{ $section->lesson_title }}</h1>
 
-                    <p>{{ $section->description }}</p>
-                    @foreach ($materials as $m)
-                        @if ($m->course_section_id == $section->id)
-                            <br />
-                            @if ($m->upload_type == 'video')
-                                <h5 class="inline card-title">Video Title: </h5>
-                                <h6 class="inline card-text">{{ $m->video_title }}</h6>
-                                <iframe src="{{ $m->filepath }}" width="70%" height="600" frameborder="0"
-                                    allowfullscreen></iframe>
-                            @elseif ($m->upload_type == 'pdf')
-                                <h5 class="inline card-title">File Name: </h5>
-                                <p class="inline card-text">{{ $m->file_name }}</p>
-                                <a href="{{ asset('storage/pdfs/' . $m->filepath) }}" target="_blank"
-                                    class="text-green-500">View PDF</a>
+                    <h3 class="inline card-title">Videos: </h3>
+                    <a href="{{ route('view.video', ['episode' => $section->course_id, 'section' => $section->id]) }}"
+                        class="inline card-text text-blue-500 hover:underline" target="_blank" onclick="openPopup(this.href); return false;">
+                        View Videos
+                    </a>
+                    <div class="mt-6">
+                        <h3> Teachers Guide</h3>
+                        @foreach ($materials as $m)
+                            @if ($m->course_section_id == $section->id)
+                                @if ($m->upload_type == 'pdf' && $m->file_category == "Teacher's Guide")
+                                    <h5 class="inline card-title">File Name: </h5>
+                                    <p class="inline card-text">{{ $m->file_name }}</p>
+                                    <a href="{{ asset('storage/pdfs/' . $m->filepath) }}" target="_blank"
+                                        class="text-green-500">View PDF</a>
+                                @endif
                             @endif
-                            <br />
-                        @endif
-                    @endforeach
+                        @endforeach
+                    </div>
+                    <div class="mt-6">
+
+                        <h3> Activities</h3>
+
+
+                        @foreach ($materials as $m)
+                            @if ($m->course_section_id == $section->id)
+                                @if ($m->upload_type == 'pdf' && $m->file_category == 'Activities')
+                                    <h5 class="inline card-title">File Name: </h5>
+                                    <p class="inline card-text">{{ $m->file_name }}</p>
+                                    <a href="{{ asset('storage/pdfs/' . $m->filepath) }}" target="_blank"
+                                        class="text-green-500">View PDF</a><br />
+                                @endif
+                            @endif
+                        @endforeach
+                    </div>
                 </div>
             </div>
         @endforeach
     </div>
+
+    <script>
+function openPopup(url) {
+    window.open(url, 'popupWindow', 'width=900,height=600,scrollbars=yes,resizable=yes');
+}
+</script>
 </x-app-layout>

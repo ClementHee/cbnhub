@@ -8,7 +8,13 @@
     <div class="py-12">
 
         <div class=" mx-auto sm:px-6 lg:px-8">
-
+            <div class="mb-4">
+                <a href="{{ route('course.create') }}">
+                    <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+                        Create Course
+                    </button>
+                </a>
+                
             <div class="overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6  border-b border-gray-200">
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight">

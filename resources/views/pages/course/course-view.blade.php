@@ -46,7 +46,7 @@
                     </button>
                 </a>
                 <div class="flex-auto p-4">
-                    <livewire:course-section-table />
+                    <livewire:course-section-table :courseId="$course->id"/>
                 </div>
             </div>
         </div>

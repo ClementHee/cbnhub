@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Course;
 
+use App\Models\Course;
 use Livewire\Component;
 
 class CourseForm extends Component
@@ -12,6 +13,7 @@ class CourseForm extends Component
     public $description;
     public $season_id;
     public $order;
+    public $courseid;
 
     public $selectedSeason;
     public $update=false;
@@ -40,21 +42,22 @@ class CourseForm extends Component
     }
     public function createCourse()
     {
-        $this->validate([
-            'course.name' => 'required|string|max:255',
-            'course.description' => 'nullable|string|max:1000',
-            'course.season_id' => 'required|exists:seasons,id',
-        ]);
-
+    
         // Create the course
-        \App\Models\Course::create($this->course->toArray());
+        Course::create([
+            'id' => $this->courseid,
+            'name' => $this->name,
+            'description' => $this->description,
+            'order' => $this->order,
+            'season_id' => $this->season_id,
+        ]);
 
         // Reset form fields
         $this->reset('course');
 
         session()->flash('message', 'Course created successfully.');
 
-        return redirect()->route('courses');
+        return redirect()->route('courses', ['season' => $this->season_id]);
     }
 
     public function updateCourse()

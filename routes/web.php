@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ReportController;
 use App\Http\Middleware\CheckCourseAccess;
 use App\Http\Controllers\CourseSectionsController;
 use App\Http\Controllers\SeasonsEpisodesController;
@@ -30,8 +31,10 @@ Route::middleware(['auth'])->group(function () {
   Route::delete('cohorts/{cohort}', [\App\Http\Controllers\CohortController::class, 'destroy'])->name('cohort.destroy');
 
   Route::get('cohort/assign/{cohort}', [\App\Http\Controllers\CohortController::class, 'assignUser'])->name('cohort.assignUser');
+  Route::get('courses/create', [CourseController::class, 'create'])->name('course.create');
+  Route::get('/courses/{season}', [CourseController::class, 'index'])->name('courses');
 
-  Route::get('/courses/{season}',[CourseController::class, 'index'])->name('courses');
+  Route::get('all-courses', [CourseController::class, 'allCourses'])->name('all-courses');
   Route::get('courses/{course}/show', [CourseController::class, 'show'])->name('course.view');
   Route::get('courses/{course}/edit', [CourseController::class, 'edit'])->name('course.edit');
   Route::get('courses/assign/{course}', [CourseController::class, 'assignCohort'])->name('course.assignCohort');
@@ -44,30 +47,22 @@ Route::middleware(['auth'])->group(function () {
   Route::get('journals/{journal}/view', [\App\Http\Controllers\JournalController::class, 'show'])->name('journal.show');
   Route::delete('journals/{journal}', [\App\Http\Controllers\JournalController::class, 'destroy'])->name('journal.destroy');
 
+  Route::get('/user-roles/{id?}', [UserController::class, 'editRole'])->name('user-roles');
+  Route::get('/users', [UserController::class, 'index'])->name('users');
+  Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 
-#Route::view('profile', 'profile')
-#   ->middleware(['auth'])
-#   ->name('profile');
+  Route::get('profile', [UserController::class, 'showProfile'])->name('profile');
+  Route::get('profile/edit', [UserController::class, 'editProfile'])->name('profile.edit');
+  Route::get('profile/{profile}/edit', [UserController::class, 'updateProfile'])->name('profile.update');
 
-#Route::middleware(['auth'])
-#    ->group(function () {
-#        Route::get('profile', [\App\Http\Controllers\UserController::class, 'assignRole']);
-#    });
-Route::get('/user-roles/{id?}', [UserController::class, 'editRole'])->name('user-roles');
-Route::get('/users', [UserController::class, 'index'])->name('users');
-Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+  Route::get('sections/create/{course}', [CourseSectionsController::class, 'createSection'])->name('section.create');
+  Route::get('sections/{courseSection}/edit', [CourseSectionsController::class, 'edit'])->name('section.edit');
+  Route::delete('sections/{courseSection}', [CourseSectionsController::class, 'destroy'])->name('section.delete');
 
+  Route::delete('sections/{courseSection}/materials/{material}', [SectionMaterialController::class, 'destroyMaterial'])->name('section.material.destroy');
+  Route::get('viewVideo/{episode}/{section}', [CourseController::class, 'viewVideo'])->name('view.video');
 
-Route::get('profile', [UserController::class, 'showProfile'])->name('profile');
-Route::get('profile/edit', [UserController::class, 'editProfile'])->name('profile.edit');
-Route::get('profile/{profile}/edit', [UserController::class, 'updateProfile'])->name('profile.update');
-
-Route::get('sections/create/{course}', [CourseSectionsController::class,'createSection'])->name('section.create');
-Route::get('sections/{courseSection}/edit', [CourseSectionsController::class, 'edit'])->name('section.edit');
-Route::delete('sections/{courseSection}', [CourseSectionsController::class, 'destroy'])->name('section.delete');
-
-Route::delete('sections/{courseSection}/materials/{material}', [SectionMaterialController::class, 'destroyMaterial'])->name('section.material.destroy');
+  Route::get('report/tppreport', [ReportController::class, 'tpp_dashboard'])->name('report.tpp');
 });
 
-require __DIR__.'/auth.php';
-
+require __DIR__ . '/auth.php';

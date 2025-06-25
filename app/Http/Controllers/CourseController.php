@@ -12,13 +12,13 @@ use Illuminate\Support\Facades\Auth;
 class CourseController extends Controller
 {
 
-     public $pdfFile;
+    public $pdfFile;
     public $ep;
     public $currentPdf = null;
     public $preview = false;
-       public $previewVid = false;
-        public $currentVid ;
-        public $prevUrl ;
+    public $previewVid = false;
+    public $currentVid;
+    public $prevUrl;
 
     public $path;
     public string $upload_type = '';
@@ -30,37 +30,36 @@ class CourseController extends Controller
     public $video_title;
     public $brightcove_url;
     public $course_section_id;
-    public string $url = '';
-    public ?string $iframeHtml = null;
 
-    public function previewPDF($pdf){
+
+    public $viewVideo = false;
+   
+  
+
+    public function previewPDF($pdf)
+    {
         $this->preview = true;
         $this->currentPdf = $pdf;
         $this->path = storage_path("app/pdfs/{$pdf}");
- 
-
     }
 
-    public function previewVideos($url){
+    public function previewVideos($url)
+    {
 
         $this->previewVid = true;
         $this->currentVid = $url;
         $this->prevUrl = $url;
-
     }
-    
+
     /**
      * Display a listing of the resource.
      */
     public function index(int $s)
     {
-
-        
-
         $courses = Course::where('season_id', $s)
             ->get();
-       
-        return view('pages.course.course',compact('courses', 's'));
+
+        return view('pages.course.course', compact('courses', 's'));
     }
 
     /**
@@ -68,7 +67,10 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('pages.course.course-create', [
+            'seasons' => Season::all(),
+        ]);
     }
 
     /**
@@ -84,7 +86,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-   
+
         //
         $course = Course::findOrFail($course->id);
 
@@ -92,8 +94,7 @@ class CourseController extends Controller
 
 
 
-        return view('pages.course.course-view', compact('course','season'));
-
+        return view('pages.course.course-view', compact('course', 'season'));
     }
 
     /**
@@ -104,7 +105,7 @@ class CourseController extends Controller
 
         $course = Course::findOrFail($course->id);
         $seasons = Season::all();
-        
+
         return view('pages.course.course-management', compact('course', 'seasons'));
     }
 
@@ -129,39 +130,50 @@ class CourseController extends Controller
 
         $course = Course::findOrFail($course->id);
 
-        return view('pages.course.cohort-assign-course',compact('course'));
+        return view('pages.course.cohort-assign-course', compact('course'));
     }
 
-    public function seeCourses(Request $request){
+    public function seeCourses(Request $request)
+    {
         $user = Auth::user()->id;
         $seasons = Season::all();
         $courses = Course::whereHas('cohorts.users', function ($query) use ($user) {
             $query->where('users.id', $user);
-        })->with(['cohorts'])->get();
+        })->with(['cohorts'])->orderBy('order')->get();
 
-        return view('pages.course.my-courses', compact('courses','seasons'));
+        return view('pages.course.my-courses', compact('courses', 'seasons'));
     }
 
-    public function seeMyCourses(Course $mycourses){
-
-        $materials =$mycourses->sectionMaterials()->get();
+    public function seeMyCourses(Course $mycourses)
+    {
+        $materials = $mycourses->sectionMaterials()->get();
         $sections = $mycourses->getCourseSections()->get();
-     
-
-     
-        
         $season = Season::findOrFail($mycourses->season_id);
-   
         $course = Course::findOrFail($mycourses->id);
-
         CourseTracking::create([
             'user_id' => Auth::user()->id,
             'course_id' => $course->id,
         ]);
-       
-        return view('pages.course.my-course-view', compact('course','season', 'materials','sections'));
+
+        return view('pages.course.my-course-view', compact('course', 'season', 'materials', 'sections'));
     }
 
+    public function allCourses()
+    {
+        $courses = Course::all();
+        $seasons = Season::all();
+        return view('pages.course.all-courses', compact('courses', 'seasons'));
+    }
 
+    public function viewVideo($episode, $courseSection){
 
+        $this->viewVideo = true;
+        if ($this->viewVideo) {
+            return view('pages.course.media', [
+                'videoUrl' => SectionMaterial::where('upload_type', 'video')->where('course_section_id',$courseSection)->get(),
+            ]);
+        } else {
+            return redirect()->back()->with('error', 'No video to preview.');
+        }
+    }
 }

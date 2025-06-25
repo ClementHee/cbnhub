@@ -24,6 +24,6 @@ class CourseSection extends Model
 
     public function sectionMaterials()
     {
-        return $this->hasMany(SectionMaterial::class);
+        return $this->hasMany(SectionMaterial::class)->orderBy('order', 'asc');
     }
 }
