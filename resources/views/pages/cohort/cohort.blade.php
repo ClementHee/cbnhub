@@ -26,8 +26,7 @@
                         </a>
                     </div>
 
-                    <div
-                       >
+                    <div>
                         <livewire:cohort-table />
                         {{-- <table class="w-full text-left table-auto min-w-max text-slate-800 px-4 py-4">
         <thead>
