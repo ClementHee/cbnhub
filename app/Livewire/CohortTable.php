@@ -52,7 +52,9 @@ final class CohortTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            
+            Column::make('Name', 'name')
+                ->sortable()
+                ->searchable(),
             Column::make('Description', 'description')
                 ->sortable()
                 ->searchable(),
@@ -97,6 +99,11 @@ final class CohortTable extends PowerGridComponent
                 ->class('text-red-600 cursor-pointer')
                 ->dispatch('confirmDelete', ['id' => $row->id]),
 
+            Button::add('assign')
+                ->slot('Assign User')
+                ->class('text-blue-600 pg-btn-black dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+                ->route('cohort.assignUser', ['cohort' => $row->id])
+            
         ];
     }
 

@@ -25,7 +25,7 @@ new class extends Component {
             <a class="block px-8 py-6 m-0 text-sm whitespace-nowrap text-slate-700" href="{{ route('dashboard') }}">
                 <img src="{{ asset('assets/img/logo.png') }}"
                     class="inline h-full max-w-full transition-all duration-200 ease-nav-brand max-h-8" alt="main_logo" />
-                <span class="ml-1 font-semibold transition-all duration-200 ease-nav-brand">CBN Hub</span>
+                <span class="ml-1 font-semibold transition-all duration-200 ease-nav-brand">CBN Disciple</span>
             </a>
         </div>
         <hr class="h-px mt-0 bg-transparent bg-gradient-to-r from-transparent via-black/40 to-transparent" />
@@ -48,106 +48,129 @@ new class extends Component {
                         <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Dashboard</span>
                     </a>
                 </li>
-                <li class="mt-0.5 w-full">
-                    <button aria-controls="dropdown-example" data-collapse-toggle="dropdown-reports"
-                        class="w-9/10 hover:underline focus:bg-gray-700 focus:text-white py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors">
-                        <div
-                            class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
-                            <!-- Courses SVG -->
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M4 4v15a1 1 0 0 0 1 1h15M8 16l2.5-5.5 3 3L17.273 7 20 9.667" />
-                            </svg>
+                @hasrole('Super Admin')
+                    <li class="mt-0.5 w-full">
+                        <button aria-controls="dropdown-example" data-collapse-toggle="dropdown-reports"
+                            class="w-9/10 hover:underline focus:bg-gray-700 focus:text-white py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors">
+                            <div
+                                class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
+                                <!-- Courses SVG -->
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M4 4v15a1 1 0 0 0 1 1h15M8 16l2.5-5.5 3 3L17.273 7 20 9.667" />
+                                </svg>
 
-                        </div>
-                        <span
-                            class="hover:underline ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Reports</span>
-                        <svg class="pl-1 w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 4 4 4-4" />
-                        </svg>
-                    </button>
-                    <ul id="dropdown-reports" class="hidden py-2 ml-2">
-                        <li class="mt-3 w-full">
-                            <a href="{{ route('report.tpp') }}"
-                                class="ml-8 hover:underline duration-300 opacity-100 ease-soft">TPP Report</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="mt-0.5 w-full">
-                    <a class="py-2.7 hover:underline focus:bg-gray-700 focus:text-white text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors"
-                        href="{{ route('cohorts') }}">
-                        <div
-                            class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
-                            <!-- Cohort SVG -->
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path fill-rule="evenodd"
-                                    d="M11.403 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6.403a3.01 3.01 0 0 1-1.743-1.612l-3.025 3.025A3 3 0 1 1 9.99 9.768l3.025-3.025A3.01 3.01 0 0 1 11.403 5Z"
-                                    clip-rule="evenodd" />
-                                <path fill-rule="evenodd"
-                                    d="M13.232 4a1 1 0 0 1 1-1H20a1 1 0 0 1 1 1v5.768a1 1 0 1 1-2 0V6.414l-6.182 6.182a1 1 0 0 1-1.414-1.414L17.586 5h-3.354a1 1 0 0 1-1-1Z"
-                                    clip-rule="evenodd" />
+                            </div>
+                            <span
+                                class="hover:underline ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Reports</span>
+                            <svg class="pl-1 w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="m1 1 4 4 4-4" />
                             </svg>
-                        </div>
-                        <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Cohort</span>
-                    </a>
-                </li>
-                <li class="mt-0.5 w-full">
-                    <button aria-controls="dropdown-example" data-collapse-toggle="dropdown-example"
-                        class="hover:underline focus:bg-gray-700 focus:text-white py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors">
-                        <div
-                            class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
-                            <!-- Courses SVG -->
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path fill-rule="evenodd"
-                                    d="M11 4.717c-2.286-.58-4.16-.756-7.045-.71A1.99 1.99 0 0 0 2 6v11c0 1.133.934 2.022 2.044 2.007 2.759-.038 4.5.16 6.956.791V4.717Zm2 15.081c2.456-.631 4.198-.829 6.956-.791A2.013 2.013 0 0 0 22 16.999V6a1.99 1.99 0 0 0-1.955-1.993c-2.885-.046-4.76.13-7.045.71v15.081Z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </div>
-                        <a href="{{ route('all-courses') }}"><span
-                                class="hover:underline ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Courses
-                                Management</span></a>
-                        <svg class="pl-1 w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 4 4 4-4" />
-                        </svg>
-                    </button>
-                    <ul id="dropdown-example" class="hidden py-2 ml-2">
-                        @foreach ([1, 2, 3, 4, 5] as $season)
+                        </button>
+                        <ul id="dropdown-reports" class="hidden py-2 ml-2">
                             <li class="mt-3 w-full">
-                                <a href="{{ route('courses', $season) }}"
-                                    class="ml-8 hover:underline duration-300 opacity-100 ease-soft">Season
-                                    {{ $season }}</a>
+                                <a href="{{ route('report.tpp') }}"
+                                    class="ml-8 hover:underline duration-300 opacity-100 ease-soft">TPP Report</a>
                             </li>
-                        @endforeach
-                    </ul>
-                </li>
-                <li class="mt-0.5 w-full">
-                    <a class="hover:underline focus:bg-gray-700 focus:text-white py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors"
-                        href="{{ route('users') }}">
-                        <div
-                            class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center fill-current stroke-0 text-center xl:p-2.5">
-                            <!-- User Management SVG -->
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                viewBox="0 0 24 24">
-                                <path fill-rule="evenodd"
-                                    d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
-                                    clip-rule="evenodd" />
+                            <li class="mt-3 w-full">
+                                <a href="{{ route('report.super5') }}"
+                                    class="ml-8 hover:underline duration-300 opacity-100 ease-soft">Super5 Report</a>
+                            </li>
+                            <li class="mt-3 w-full">
+                                <a href="{{ route('report.super5') }}"
+                                    class="ml-8 hover:underline duration-300 opacity-100 ease-soft">Superbook Academy
+                                    Report</a>
+                            </li>
+                            <li class="mt-3 w-full">
+                                <a href="{{ route('report.super5') }}"
+                                    class="ml-8 hover:underline duration-300 opacity-100 ease-soft">School Of Life
+                                    Report</a>
+                            </li>
+                            <li class="mt-3 w-full">
+                                <a href="{{ route('report.super5') }}"
+                                    class="ml-8 hover:underline duration-300 opacity-100 ease-soft">HDME Report</a>
+                            </li><li class="mt-3 w-full">
+                            <a href="{{ route('report.super5') }}"
+                                class="ml-8 hover:underline duration-300 opacity-100 ease-soft">Humanitarian Report</a>
+                        </li>
+                        </ul>
+                    </li>
+                    <li class="mt-0.5 w-full">
+                        <a class="py-2.7 hover:underline focus:bg-gray-700 focus:text-white text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors"
+                            href="{{ route('cohorts') }}">
+                            <div
+                                class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
+                                <!-- Cohort SVG -->
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M11.403 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6.403a3.01 3.01 0 0 1-1.743-1.612l-3.025 3.025A3 3 0 1 1 9.99 9.768l3.025-3.025A3.01 3.01 0 0 1 11.403 5Z"
+                                        clip-rule="evenodd" />
+                                    <path fill-rule="evenodd"
+                                        d="M13.232 4a1 1 0 0 1 1-1H20a1 1 0 0 1 1 1v5.768a1 1 0 1 1-2 0V6.414l-6.182 6.182a1 1 0 0 1-1.414-1.414L17.586 5h-3.354a1 1 0 0 1-1-1Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Cohort</span>
+                        </a>
+                    </li>
+                    <li class="mt-0.5 w-full">
+                        <button aria-controls="dropdown-example" data-collapse-toggle="dropdown-example"
+                            class="hover:underline focus:bg-gray-700 focus:text-white py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors">
+                            <div
+                                class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
+                                <!-- Courses SVG -->
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M11 4.717c-2.286-.58-4.16-.756-7.045-.71A1.99 1.99 0 0 0 2 6v11c0 1.133.934 2.022 2.044 2.007 2.759-.038 4.5.16 6.956.791V4.717Zm2 15.081c2.456-.631 4.198-.829 6.956-.791A2.013 2.013 0 0 0 22 16.999V6a1.99 1.99 0 0 0-1.955-1.993c-2.885-.046-4.76.13-7.045.71v15.081Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <a href="{{ route('all-courses') }}"><span
+                                    class="hover:underline ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Courses
+                                    Management</span></a>
+                            <svg class="pl-1 w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 4 4 4-4" />
                             </svg>
-                        </div>
-                        <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">User
-                            Management</span>
-                    </a>
-                </li>
+                        </button>
+                        <ul id="dropdown-example" class="hidden py-2 ml-2">
+                            @foreach ([1, 2, 3, 4, 5] as $season)
+                                <li class="mt-3 w-full">
+                                    <a href="{{ route('courses', $season) }}"
+                                        class="ml-8 hover:underline duration-300 opacity-100 ease-soft">Season
+                                        {{ $season }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    <li class="mt-0.5 w-full">
+                        <a class="hover:underline focus:bg-gray-700 focus:text-white py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors"
+                            href="{{ route('users') }}">
+                            <div
+                                class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center fill-current stroke-0 text-center xl:p-2.5">
+                                <!-- User Management SVG -->
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4h-4Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">User
+                                Management</span>
+                        </a>
+                    </li>
+                @endhasrole
                 <li class="mt-0.5 w-full">
                     <a class="hover:underline focus:bg-gray-700 focus:text-white py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors"
                         href="{{ route('my-courses') }}">

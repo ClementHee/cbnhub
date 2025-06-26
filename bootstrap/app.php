@@ -15,6 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
 
         $middleware->append(CheckCourseAccess::class);
+        $middleware->alias([
+            'superadmin' => \App\Http\Middleware\UserAdmin::class,
+        ]);
         
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -7,8 +7,7 @@
                 <h1 class="text-2xl font-bold mb-4">TPP Dashboard</h1>
                 <p class="text-gray-600">This dashboard provides insights into the TPP data, including user interactions and cohort performance.</p>
               </div>
-              
-              <iframe title="TPP Dashboard_3" width="100%" height="850vh" src="https://app.powerbi.com/view?r=eyJrIjoiMGMyODk5NmUtZjg5YS00Y2E0LTg5NzAtOWMwNTQ3YTc5NmMxIiwidCI6ImQzMWMxMWM5LTNhZjQtNGMwOS04NmZmLWM0NGY1NTYxNGZlYSIsImMiOjEwfQ%3D%3D" frameborder="0" allowFullScreen="true"></iframe>
+              <iframe title="TPP Dashboard" width="100%" height="850vh" src="{{$src->src_url}}" frameborder="0" allowFullScreen="true"></iframe>
             </div>
         </div>
     </div>
