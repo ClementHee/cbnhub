@@ -40,11 +40,7 @@
             </div>
             <div class="mt-8">
                 <h1 class="text-xl font-bold mb-4">Manage Course Sections</h1>
-                <a href="{{ route('section.create', $course->id) }}">
-                    <button class="mb-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-700">
-                        Add New Section
-                    </button>
-                </a>
+                
                 <div class="flex-auto p-4">
                     <livewire:course-section-table :courseId="$course->id"/>
                 </div>

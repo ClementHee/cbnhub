@@ -69,6 +69,7 @@ class MaterialUpload extends Component
             'filepath' => $this->ep.$this->pdfFile->getClientOriginalName(),
             'file_name' => $this->file_name,
             'file_category' => $this->file_category,
+            'order' => $this->order,
         ]);
 
 
@@ -92,6 +93,7 @@ class MaterialUpload extends Component
             'filepath' => $this->brightcove_url,
             'brightcove_url' => $this->brightcove_url,
             'video_title' => $this->video_title,
+            'order' => $this->order,
      
         ]);
 

@@ -81,20 +81,20 @@ new class extends Component {
                                     class="ml-8 hover:underline duration-300 opacity-100 ease-soft">Super5 Report</a>
                             </li>
                             <li class="mt-3 w-full">
-                                <a href="{{ route('report.super5') }}"
+                                <a href="{{ route('report.sba') }}"
                                     class="ml-8 hover:underline duration-300 opacity-100 ease-soft">Superbook Academy
                                     Report</a>
                             </li>
                             <li class="mt-3 w-full">
-                                <a href="{{ route('report.super5') }}"
+                                <a href="{{ route('report.sol') }}"
                                     class="ml-8 hover:underline duration-300 opacity-100 ease-soft">School Of Life
                                     Report</a>
                             </li>
                             <li class="mt-3 w-full">
-                                <a href="{{ route('report.super5') }}"
+                                <a href="{{ route('report.hdme') }}"
                                     class="ml-8 hover:underline duration-300 opacity-100 ease-soft">HDME Report</a>
                             </li><li class="mt-3 w-full">
-                            <a href="{{ route('report.super5') }}"
+                            <a href="{{ route('report.humanitarian') }}"
                                 class="ml-8 hover:underline duration-300 opacity-100 ease-soft">Humanitarian Report</a>
                         </li>
                         </ul>

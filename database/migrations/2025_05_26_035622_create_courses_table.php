@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->integer('order')->nullable();
+            $table->string('visibility')->default('draft')->nullable(); // public, private, or hidden
             $table->foreignId('season_id')->constrained('seasons')->onDelete('cascade');
             $table->timestamps();
         });

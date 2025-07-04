@@ -32,6 +32,16 @@ final class CourseSectionTable extends PowerGridComponent
         ];
     }
 
+    public function header(): array
+    {
+        // You can add buttons or other elements to the header of the table
+        return [
+            Button::make('create', 'Create Section')
+                ->class('flex bg-blue-600 text-white px-3 py-2 rounded')
+                ->route('section.create', ['course' => $this->courseId])
+        ];
+    }
+
     public function datasource(): Builder
     {
 
@@ -59,8 +69,7 @@ final class CourseSectionTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('Id', 'id'),
-            Column::make('Course id', 'course_id'),
+        
             Column::make('Lesson title', 'lesson_title')
                 ->sortable()
                 ->searchable(),
@@ -110,22 +119,26 @@ final class CourseSectionTable extends PowerGridComponent
                 ->slot('Delete')
                 ->id()
                 ->class('text-red-600')
-                ->dispatchTo(
-                    component: 'course-section-table',
-                    event: 'deleteSection',
-                    params: ['data' => $row->id]
-                )
+                ->dispatch('confirmDelete', ['id' => $row->id]),
         ];
     }
 
-    public function deleteSection($data)
+    protected function getListeners()
     {
+        return array_merge(
+            parent::getListeners(),
+            ['delete' => 'delete']
+        );
+    }
 
-        CourseSection::findOrFail($data)->delete();
+    public function delete($id)
+    {
+        CourseSection::findOrFail($id)->delete();
 
         $this->refresh(); // ✅ refresh the PowerGrid table
         session()->flash('success', 'Section deleted successfully.');
     }
+
 
 
     /*

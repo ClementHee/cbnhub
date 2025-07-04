@@ -13,17 +13,13 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="flex items-center mb-4">
                         <h1>Cohorts</h1>
 
-                        <a href="{{ route('cohort.create') }}">
-                            <button class="ml-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                Create Cohort
-                            </button>
-                        </a>
+                       
                     </div>
 
                     <div>

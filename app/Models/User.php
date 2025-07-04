@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,8 +16,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasUuids;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, HasUuids, LogsActivity;
 
     protected $keyType = 'string';
     public $incrementing = false;
@@ -62,12 +65,12 @@ class User extends Authenticatable
         });
     }
 
-        // User belongs to many cohorts
+    // User belongs to many cohorts
     public function cohorts(): BelongsToMany
     {
         return $this->belongsToMany(Cohort::class, 'cohort_users')
-                    ->withPivot('enrolled_at', 'status')
-                    ->withTimestamps();
+            ->withPivot('enrolled_at', 'status')
+            ->withTimestamps();
     }
 
     // Get all courses user has access to through cohorts
@@ -89,10 +92,10 @@ class User extends Authenticatable
     public function canAccessCourse(Course $course): bool
     {
         return $this->cohorts()
-                    ->whereHas('courses', function ($query) use ($course) {
-                        $query->where('courses.id', $course->id);
-                    })
-                    ->exists();
+            ->whereHas('courses', function ($query) use ($course) {
+                $query->where('courses.id', $course->id);
+            })
+            ->exists();
     }
 
     // Get the user's SuperTokens ID
@@ -117,5 +120,11 @@ class User extends Authenticatable
     {
         return $this->trackings()->latest()->first();
     }
-    
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logAll()  // log all fillable / dirty attributes
+            ->useLogName('user_activity') // specify a custom log name
+            ->setDescriptionForEvent(fn(string $eventName) => "User has been {$eventName}");
+    }
 }

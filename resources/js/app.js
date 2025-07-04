@@ -27,4 +27,20 @@ window.addEventListener('DOMContentLoaded', () => {
             'success'
         );
     });
+
+    window.addEventListener('swal:created', event => {
+    const { message, redirectUrl } = event.detail[0];
+console.log('SWAL event data:', event.detail[0]);
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: message,
+        showConfirmButton: false,
+        timer: 10000,
+        timerProgressBar: true
+    }).then(() => {
+        console.log('Redirecting to:', redirectUrl);
+        window.location.href = redirectUrl;
+    });
+});
 });

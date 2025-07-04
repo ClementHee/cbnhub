@@ -26,7 +26,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Role::all();
+        return view('pages.user.user-create',compact('roles'));
     }
 
     /**
@@ -91,6 +92,12 @@ class UserController extends Controller
     {
         $user->update($request->all());
         return redirect()->route('profile')->with('success', 'Profile updated successfully.');
+    }
+
+    public function audit_log()
+    {
+   
+        return view('pages.superadmin.audit_log');
     }
 
     //** permission:read tpp/read super5/read sba*/

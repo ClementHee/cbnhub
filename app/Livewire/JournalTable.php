@@ -29,6 +29,16 @@ final class JournalTable extends PowerGridComponent
         ];
     }
 
+    public function header(): array
+    {
+        // You can add buttons or other elements to the header of the table
+        return [
+            Button::make('create', 'Create Journal')
+                ->class('flex bg-blue-600 text-white px-3 py-2 rounded')
+                ->route('journal.create', [])
+        ];
+    }
+
     public function datasource(): Builder
     {
         return Journal::query();
@@ -98,17 +108,16 @@ final class JournalTable extends PowerGridComponent
     public function actions(Journal $row): array
     {
         return [
-            Button::add('edit')
-                ->slot('Edit: ' . $row->id)
-                ->id()
-                ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-                ->dispatch('edit', ['rowId' => $row->id]),
-
 
             Button::add('delete')
                 ->slot('Delete')
                 ->class('text-red-600 cursor-pointer')
                 ->dispatch('confirmDelete', ['id' => $row->id]),
+
+            Button::add('view')
+                ->slot('View')
+                ->class('text-blue-600 cursor-pointer')
+                ->route('journal.show', ['journal' => $row->id]),
         ];
     }
 

@@ -36,6 +36,8 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth', 'superadmin'])->group(function () {
 
+  Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+
   Route::get('/view-pdf/{filename}', [PDFController::class, 'view'])->name('pdf.view');
   Route::get('/download-pdf/{filename}', [PDFController::class, 'download'])->name('pdf.download');
   Route::get('/secure-pdf/{filename}', [PdfController::class, 'view'])->name('pdf.secure-view');
@@ -72,10 +74,12 @@ Route::middleware(['auth', 'superadmin'])->group(function () {
   Route::get('report/create', [ReportController::class, 'create'])->name('report.create');
   Route::get('report/tppreport', [ReportController::class, 'tpp_dashboard'])->name('report.tpp');
   Route::get('report/super5', [ReportController::class, 'super5_dashboard'])->name('report.super5');
-  Route::get('report/sba', [ReportController::class, 'super5_dashboard'])->name('report.sba');
-  Route::get('report/sol', [ReportController::class, 'super5_dashboard'])->name('report.sol');
-  Route::get('report/hdme', [ReportController::class, 'super5_dashboard'])->name('report.hdme');
-  Route::get('report/humanitarian', [ReportController::class, 'super5_dashboard'])->name('report.humanitarian');
+  Route::get('report/sba', [ReportController::class, 'sba_dashboard'])->name('report.sba');
+  Route::get('report/sol', [ReportController::class, 'sol_dashboard'])->name('report.sol');
+  Route::get('report/hdme', [ReportController::class, 'hdme_dashboard'])->name('report.hdme');
+  Route::get('report/humanitarian', [ReportController::class, 'humanitarian_dashboard'])->name('report.humanitarian');
+
+  Route::get('audit_log',[UserController::class,'audit_log'])->name('audit_log');
 });
 
 require __DIR__ . '/auth.php';

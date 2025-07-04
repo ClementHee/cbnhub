@@ -79,6 +79,7 @@ class JournalForm extends Component
     }
 
     public function submitJournal(){
+        
 
         $pictures_path = [];
    
@@ -99,6 +100,7 @@ class JournalForm extends Component
              // Adjust as needed
         ]);
 
+
         $saved = Journal::create([
             'name' => $this->name,
             'church_name' => $this->church_name,
@@ -113,6 +115,7 @@ class JournalForm extends Component
             'improvement' => $this->improvement,
             'feedback' => $this->feedback,
             'testimony' => $this->testimony,
+            
         ]);
 
 
@@ -128,7 +131,7 @@ class JournalForm extends Component
                 array_push($pictures_path, $filepath);
             }
             $pictures_array = implode(",",$pictures_path);
-         
+  
             $saved->update([
                 'pictures' => $pictures_array
             ]);

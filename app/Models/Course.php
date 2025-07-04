@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use App\Models\CourseSection;
+use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Course extends Model
 {
     //
+    use LogsActivity;
     protected $fillable = [
         'id',
         'name',
@@ -76,6 +79,14 @@ class Course extends Model
         )->orderBy('order', 'asc');
     }
 
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logAll()  // log all fillable / dirty attributes
+            ->useLogName('course_activity') // specify a custom log name
+            ->setDescriptionForEvent(fn(string $eventName) => "Course has been {$eventName}");
+    }
     
     
 }

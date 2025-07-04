@@ -26,6 +26,18 @@ final class UserTable extends PowerGridComponent
             PowerGrid::footer()
                 ->showPerPage()
                 ->showRecordCount(),
+
+
+        ];
+    }
+
+    public function header(): array
+    {
+        // You can add buttons or other elements to the header of the table
+        return [
+            Button::make('create', 'Create User')
+                ->class('flex bg-blue-600 text-white px-3 py-2 rounded')
+                ->route('users.create', [])
         ];
     }
 
@@ -63,17 +75,13 @@ final class UserTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-
-
-
-
             Column::make('Created at', 'created_at')
                 ->sortable()
                 ->searchable(),
             Column::add()
                 ->title('Roles')
-                ->field('role_names')
-                ->sortable(),
+                ->field('role_names'),
+
             Column::action('Action')
 
 
@@ -113,7 +121,8 @@ final class UserTable extends PowerGridComponent
             parent::getListeners(),
             [
                 'delete' => 'delete',
-                'edit' => 'edit'
+                'edit' => 'edit',
+                'create' => 'create',
             ]
 
         );
@@ -123,6 +132,11 @@ final class UserTable extends PowerGridComponent
     {
         User::findOrFail($id)->delete();
         $this->dispatch('swal:deleted');
+    }
+
+    protected function create()
+    {
+        $this->redirect(route('users.create'));
     }
 
     /*

@@ -21,7 +21,12 @@
             <input type="text" wire:model="file_name" class="w-full p-2 border rounded mb-4">
 
             <label class="block font-medium text-gray-700 mb-2">File Category:</label>
-            <input type="text" wire:model="file_category" class="w-full p-2 border rounded mb-4">
+            <select wire:model="file_category"
+                class="w-full p-2 border rounded mb-4">
+                <option value="">Select Category</option>
+                <option value="Teacher's Guide">Teacher's Guide</option>
+                <option value="Activities">Activities</option>
+            </select>
 
             <div class="flex items-center space-x-4 mb-4">
 

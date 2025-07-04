@@ -29,6 +29,16 @@ final class CohortTable extends PowerGridComponent
         ];
     }
 
+    public function header(): array
+    {
+        // You can add buttons or other elements to the header of the table
+        return [
+            Button::make('create', 'Create Cohort')
+                ->class('flex bg-blue-600 text-white px-3 py-2 rounded')
+                ->route('cohort.create', [])
+        ];
+    }
+
     public function datasource(): Builder
     {
         return Cohort::query();
