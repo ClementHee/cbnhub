@@ -15,7 +15,7 @@ class ReportController extends Controller
 
     public function tpp_dashboard()
     {
-        $src=Report::where('type', 'tpp')->first();
+        $src=Report::where('type', 'tpp')->orderBy('created_at', 'desc')->first();
         // Logic for TPP dashboard
      
         return view('pages.report.report',compact('src'));
@@ -23,31 +23,31 @@ class ReportController extends Controller
 
     public function super5_dashboard()
     {
-        $src=Report::where('type', 'super5')->first();
+        $src=Report::where('type', 'super5')->orderBy('created_at', 'desc')->first();
         // Logic for TPP dashboard
         return view('pages.report.report',compact('src'));
     }
     public function sba_dashboard()
     {
-        $src=Report::where('type', 'sba')->first();
+        $src=Report::where('type', 'sba')->orderBy('created_at', 'desc')->first();
         // Logic for TPP dashboard
         return view('pages.report.report',compact('src'));
     }
     public function sol_dashboard()
     {
-        $src=Report::where('type', 'sol')->first();
+        $src=Report::where('type', 'sol')->orderBy('created_at', 'desc')->first();
         // Logic for TPP dashboard
         return view('pages.report.report',compact('src'));
     }
     public function hdme_dashboard()
     {
-        $src=Report::where('type', 'hdme')->first();
+        $src=Report::where('type', 'hdme')->orderBy('created_at', 'desc')->first();
         // Logic for TPP dashboard
         return view('pages.report.report',compact('src'));
     }
     public function humanitarian_dashboard()
     {
-        $src=Report::where('type', 'humanitarian')->first();
+        $src=Report::where('type', 'humanitarian')->orderBy('created_at', 'desc')->first();
         // Logic for TPP dashboard
         return view('pages.report.report',compact('src'));
     }

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cohort;
 use App\Models\User;
+use App\Models\Cohort;
+use App\Models\Announcement;
 use Illuminate\Http\Request;
 
 class Dashboard extends Controller
@@ -17,12 +18,20 @@ class Dashboard extends Controller
         $userCount = User::count();
         $cohortCount = Cohort::count();
         $cohortNotAssigned = Cohort::whereDoesntHave('courses')->get();
+
+        // You can also fetch other data as needed, such as announcements, products, etc.
+        // For example, if you have an Announcement model:
+        $announcements = Announcement::where('status', 'published')
+            ->orderBy('created_at', 'desc')
+            ->take(5) // Limit to the latest 5 announcements
+            ->get();
       
 
         return view('dashboard', [
             'userCount' => $userCount,
             'cohortCount' => $cohortCount,
             'cohortNotAssigned' => $cohortNotAssigned,
+            'announcements' => $announcements,
         ]   );
     }
 

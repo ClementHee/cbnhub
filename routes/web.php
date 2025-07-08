@@ -80,6 +80,9 @@ Route::middleware(['auth', 'superadmin'])->group(function () {
   Route::get('report/humanitarian', [ReportController::class, 'humanitarian_dashboard'])->name('report.humanitarian');
 
   Route::get('audit_log',[UserController::class,'audit_log'])->name('audit_log');
+
+  Route::get('announcements', [\App\Http\Controllers\AnnouncementController::class, 'index'])->name('announcements');
+  Route::get('announcements/create', [\App\Http\Controllers\AnnouncementController::class, 'create'])->name('announcement.create');
 });
 
 require __DIR__ . '/auth.php';

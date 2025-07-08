@@ -79,6 +79,6 @@ class CourseForm extends Component
 
         session()->flash('message', 'Course updated successfully.');
 
-        return redirect()->route('courses');
+        return redirect()->route('courses',['season' => $this->season_id]);
     }
 }

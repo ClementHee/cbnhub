@@ -127,4 +127,9 @@ class User extends Authenticatable
             ->useLogName('user_activity') // specify a custom log name
             ->setDescriptionForEvent(fn(string $eventName) => "User has been {$eventName}");
     }
+
+    public function announcements()
+    {
+        return $this->hasMany(Announcement::class, 'author', 'id');
+    }
 }

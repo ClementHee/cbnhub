@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->append(CheckCourseAccess::class);
         $middleware->alias([
             'superadmin' => \App\Http\Middleware\UserAdmin::class,
+            'cbnhub' => \App\Http\Middleware\CBNHubLogin::class,
         ]);
         
     })

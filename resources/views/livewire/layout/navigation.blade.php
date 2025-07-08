@@ -49,56 +49,7 @@ new class extends Component {
                     </a>
                 </li>
                 @hasrole('Super Admin')
-                    <li class="mt-0.5 w-full">
-                        <button aria-controls="dropdown-example" data-collapse-toggle="dropdown-reports"
-                            class="w-9/10 hover:underline focus:bg-gray-700 focus:text-white py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors">
-                            <div
-                                class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
-                                <!-- Courses SVG -->
-                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                    viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="M4 4v15a1 1 0 0 0 1 1h15M8 16l2.5-5.5 3 3L17.273 7 20 9.667" />
-                                </svg>
-
-                            </div>
-                            <span
-                                class="hover:underline ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Reports</span>
-                            <svg class="pl-1 w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 10 6">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="m1 1 4 4 4-4" />
-                            </svg>
-                        </button>
-                        <ul id="dropdown-reports" class="hidden py-2 ml-2">
-                            <li class="mt-3 w-full">
-                                <a href="{{ route('report.tpp') }}"
-                                    class="ml-8 hover:underline duration-300 opacity-100 ease-soft">TPP Report</a>
-                            </li>
-                            <li class="mt-3 w-full">
-                                <a href="{{ route('report.super5') }}"
-                                    class="ml-8 hover:underline duration-300 opacity-100 ease-soft">Super5 Report</a>
-                            </li>
-                            <li class="mt-3 w-full">
-                                <a href="{{ route('report.sba') }}"
-                                    class="ml-8 hover:underline duration-300 opacity-100 ease-soft">Superbook Academy
-                                    Report</a>
-                            </li>
-                            <li class="mt-3 w-full">
-                                <a href="{{ route('report.sol') }}"
-                                    class="ml-8 hover:underline duration-300 opacity-100 ease-soft">School Of Life
-                                    Report</a>
-                            </li>
-                            <li class="mt-3 w-full">
-                                <a href="{{ route('report.hdme') }}"
-                                    class="ml-8 hover:underline duration-300 opacity-100 ease-soft">HDME Report</a>
-                            </li><li class="mt-3 w-full">
-                            <a href="{{ route('report.humanitarian') }}"
-                                class="ml-8 hover:underline duration-300 opacity-100 ease-soft">Humanitarian Report</a>
-                        </li>
-                        </ul>
-                    </li>
+                   
                     <li class="mt-0.5 w-full">
                         <a class="py-2.7 hover:underline focus:bg-gray-700 focus:text-white text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors"
                             href="{{ route('cohorts') }}">
@@ -117,6 +68,26 @@ new class extends Component {
                                 </svg>
                             </div>
                             <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Cohort</span>
+                        </a>
+                    </li>
+                    <li class="mt-0.5 w-full">
+                        <a class="py-2.7 hover:underline focus:bg-gray-700 focus:text-white text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors"
+                            href="{{ route('announcements') }}">
+                            <div
+                                class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
+                                <!-- Cohort SVG -->
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M11.403 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6.403a3.01 3.01 0 0 1-1.743-1.612l-3.025 3.025A3 3 0 1 1 9.99 9.768l3.025-3.025A3.01 3.01 0 0 1 11.403 5Z"
+                                        clip-rule="evenodd" />
+                                    <path fill-rule="evenodd"
+                                        d="M13.232 4a1 1 0 0 1 1-1H20a1 1 0 0 1 1 1v5.768a1 1 0 1 1-2 0V6.414l-6.182 6.182a1 1 0 0 1-1.414-1.414L17.586 5h-3.354a1 1 0 0 1-1-1Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Announcement</span>
                         </a>
                     </li>
                     <li class="mt-0.5 w-full">
@@ -240,6 +211,62 @@ new class extends Component {
                         <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Profile</span>
                     </a>
                 </li>
+
+                <li class="w-full mt-4">
+                    <h6 class="pl-6 ml-2 font-bold leading-tight uppercase text-xs opacity-60">CBN HUB</h6>
+                </li>
+                 @hasrole('Super Admin')
+                    <li class="mt-0.5 w-full">
+                        <button aria-controls="dropdown-example" data-collapse-toggle="dropdown-reports"
+                            class="w-9/10 hover:underline focus:bg-gray-700 focus:text-white py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors">
+                            <div
+                                class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
+                                <!-- Courses SVG -->
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M4 4v15a1 1 0 0 0 1 1h15M8 16l2.5-5.5 3 3L17.273 7 20 9.667" />
+                                </svg>
+
+                            </div>
+                            <span
+                                class="hover:underline ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Reports</span>
+                            <svg class="pl-1 w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="m1 1 4 4 4-4" />
+                            </svg>
+                        </button>
+                        <ul id="dropdown-reports" class="hidden py-2 ml-2">
+                            <li class="mt-3 w-full">
+                                <a href="{{ route('report.tpp') }}"
+                                    class="ml-8 hover:underline duration-300 opacity-100 ease-soft">TPP Report</a>
+                            </li>
+                            <li class="mt-3 w-full">
+                                <a href="{{ route('report.super5') }}"
+                                    class="ml-8 hover:underline duration-300 opacity-100 ease-soft">Super5 Report</a>
+                            </li>
+                            <li class="mt-3 w-full">
+                                <a href="{{ route('report.sba') }}"
+                                    class="ml-8 hover:underline duration-300 opacity-100 ease-soft">Superbook Academy
+                                    Report</a>
+                            </li>
+                            <li class="mt-3 w-full">
+                                <a href="{{ route('report.sol') }}"
+                                    class="ml-8 hover:underline duration-300 opacity-100 ease-soft">School Of Life
+                                    Report</a>
+                            </li>
+                            <li class="mt-3 w-full">
+                                <a href="{{ route('report.hdme') }}"
+                                    class="ml-8 hover:underline duration-300 opacity-100 ease-soft">HDME Report</a>
+                            </li><li class="mt-3 w-full">
+                            <a href="{{ route('report.humanitarian') }}"
+                                class="ml-8 hover:underline duration-300 opacity-100 ease-soft">Humanitarian Report</a>
+                        </li>
+                        </ul>
+                    </li>
+                    @endhasrole
             </ul>
         </div>
     </aside>
