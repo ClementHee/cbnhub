@@ -13,7 +13,7 @@ class AnnouncementController extends Controller
     public function index()
     {
         //  
-        return view('pages.announcement.announcement');
+        return view('pages.sba.announcement.announcement');
     }
 
     /**
@@ -22,7 +22,7 @@ class AnnouncementController extends Controller
     public function create()
     {
         //
-        return view('pages.announcement.create-announcement');
+        return view('pages.sba.announcement.create-announcement');
     }
 
     /**

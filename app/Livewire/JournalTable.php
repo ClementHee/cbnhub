@@ -108,16 +108,17 @@ final class JournalTable extends PowerGridComponent
     public function actions(Journal $row): array
     {
         return [
-
-            Button::add('delete')
-                ->slot('Delete')
-                ->class('text-red-600 cursor-pointer')
-                ->dispatch('confirmDelete', ['id' => $row->id]),
-
             Button::add('view')
                 ->slot('View')
-                ->class('text-blue-600 cursor-pointer')
+                ->class('bg-blue-500 hover:bg-blue-800 text-white px-3 py-1 rounded cursor-pointer')
                 ->route('journal.show', ['journal' => $row->id]),
+            
+            Button::add('delete')
+                ->slot('Delete')
+                ->class('bg-red-500 hover:bg-red-800 text-white px-3 py-1 rounded cursor-pointer')
+                ->dispatch('confirmDelete', ['id' => $row->id]),
+
+            
         ];
     }
 

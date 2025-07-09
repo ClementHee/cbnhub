@@ -18,7 +18,7 @@ class UserController extends Controller
     
         $roles = Role::all();
         $users = User::all();
-        return view('pages.user.users', compact('roles','users'));
+        return view('pages.sba.user.users', compact('roles','users'));
     }
 
     /**
@@ -27,7 +27,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view('pages.user.user-create',compact('roles'));
+        return view('pages.sba.user.user-create',compact('roles'));
     }
 
     /**
@@ -74,18 +74,18 @@ class UserController extends Controller
 
     public function editRole($id){
 
-        return view('pages.user.user-roles', compact('id'));
+        return view('pages.sba.user.user-roles', compact('id'));
     }
 
     public function showProfile()
     {
         $user = Auth::user();
-        return view('pages.user.profile', compact('user'));
+        return view('pages.sba.user.profile', compact('user'));
     }
     public function editProfile()
     {
        
-        return view('pages.user.edit-profile', compact('user'));
+        return view('pages.sba.user.edit-profile', compact('user'));
     }
     
     public function updateProfile(Request $request, User $user)
@@ -97,7 +97,7 @@ class UserController extends Controller
     public function audit_log()
     {
    
-        return view('pages.superadmin.audit_log');
+        return view('pages.sba.superadmin.audit_log');
     }
 
     //** permission:read tpp/read super5/read sba*/

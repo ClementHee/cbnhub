@@ -101,17 +101,17 @@ final class CohortTable extends PowerGridComponent
             Button::add('edit')
                 ->slot('Edit')
                 ->id()
-                ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+                ->class('bg-blue-500 hover:bg-blue-800 text-white px-3 py-1 rounded cursor-pointer')
                 ->route('cohort.edit', ['cohort' => $row->id]),
 
             Button::add('delete')
                 ->slot('Delete')
-                ->class('text-red-600 cursor-pointer')
+                ->class('bg-red-500 hover:bg-red-800 text-white px-3 py-1 rounded cursor-pointer')
                 ->dispatch('confirmDelete', ['id' => $row->id]),
 
             Button::add('assign')
                 ->slot('Assign User')
-                ->class('text-blue-600 pg-btn-black dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+                ->class('bg-green-500 hover:bg-green-800 text-white px-3 py-1 rounded cursor-pointer')
                 ->route('cohort.assignUser', ['cohort' => $row->id])
             
         ];

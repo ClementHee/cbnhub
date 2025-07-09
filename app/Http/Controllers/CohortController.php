@@ -13,7 +13,7 @@ class CohortController extends Controller
     public function index()
     {
         $cohorts = Cohort::all();
-        return view('pages.cohort.cohort', compact('cohorts'));
+        return view('pages.sba.cohort.cohort', compact('cohorts'));
     }
 
     /**
@@ -21,7 +21,7 @@ class CohortController extends Controller
      */
     public function create()
     {
-        return view('pages.cohort.cohort-management');
+        return view('pages.sba.cohort.cohort-management');
     }
 
     /**
@@ -47,7 +47,7 @@ class CohortController extends Controller
     {
         $cohort = Cohort::findOrFail($cohort->id);
        
-        return view('pages.cohort.cohort-management', compact('cohort'));
+        return view('pages.sba.cohort.cohort-management', compact('cohort'));
     }
 
     /**
@@ -75,7 +75,7 @@ class CohortController extends Controller
     {
         $cohort = Cohort::findOrFail($cohort->id);
        
-        return view('pages.cohort.cohort-assign-user', compact('cohort'));
+        return view('pages.sba.cohort.cohort-assign-user', compact('cohort'));
     }
 
 }

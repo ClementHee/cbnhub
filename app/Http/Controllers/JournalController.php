@@ -13,7 +13,7 @@ class JournalController extends Controller
     public function index()
     {  
         $journals = Journal::all();
-        return view ('pages.journal.journal', compact('journals'));
+        return view ('pages.sba.journal.journal', compact('journals'));
     }
 
     /**
@@ -21,7 +21,7 @@ class JournalController extends Controller
      */
     public function create()
     {
-        return view ('pages.journal.journal-form');
+        return view ('pages.sba.journal.journal-form');
     }
 
     /**
@@ -37,7 +37,7 @@ class JournalController extends Controller
      */
     public function show(Journal $journal)
     {
-        return view('pages.journal.journal-form', compact('journal'));
+        return view('pages.sba.journal.journal-form', compact('journal'));
     }
 
     /**

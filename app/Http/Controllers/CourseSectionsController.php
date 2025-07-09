@@ -44,7 +44,7 @@ class CourseSectionsController extends Controller
      */
     public function edit(CourseSection $courseSection)
     {
-        return view('pages.course.section-view', [
+        return view('pages.sba.course.section-view', [
             'courseSection' => $courseSection,
         ]);
     }
@@ -70,7 +70,7 @@ class CourseSectionsController extends Controller
 
     public function createSection($courseId)
     {
-        return view('pages.course.section-create', [
+        return view('pages.sba.course.section-create', [
             'courseId' => $courseId,
         ]);
     }

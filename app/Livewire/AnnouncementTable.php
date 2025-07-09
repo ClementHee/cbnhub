@@ -122,8 +122,8 @@ final class AnnouncementTable extends PowerGridComponent
     public function actions(Announcement $row): array
     {
         $statusClass = $row->status === 'published'
-            ? 'text-yellow-500 hover:text-yellow-800  cursor-pointer' 
-            : 'text-green-500  hover:text-green-800  cursor-pointer';
+            ? 'bg-yellow-500 hover:bg-yellow-800 text-white cursor-pointer' 
+            : 'bg-green-500  hover:bg-green-800 text-white cursor-pointer';
         return [
             Button::add('publish')
                 ->slot($row->status === 'published' ? 'Set As Draft' : 'Publish')
@@ -133,7 +133,7 @@ final class AnnouncementTable extends PowerGridComponent
 
             Button::add('delete')
                 ->slot('Delete')
-                ->class('text-red-500 hover:text-red-800 cursor-pointer')
+                ->class('bg-red-500 hover:bg-red-800 text-white px-3 py-1 rounded cursor-pointer')
                 ->dispatch('confirmDelete', ['id' => $row->id]),
         ];
     }

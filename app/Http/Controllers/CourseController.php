@@ -59,7 +59,7 @@ class CourseController extends Controller
         $courses = Course::where('season_id', $s)
             ->get();
 
-        return view('pages.course.course', compact('courses', 's'));
+        return view('pages.sba.course.course', compact('courses', 's'));
     }
 
     /**
@@ -68,7 +68,7 @@ class CourseController extends Controller
     public function create()
     {
 
-        return view('pages.course.course-create', [
+        return view('pages.sba.course.course-create', [
             'seasons' => Season::all(),
         ]);
     }
@@ -94,7 +94,7 @@ class CourseController extends Controller
 
 
 
-        return view('pages.course.course-view', compact('course', 'season'));
+        return view('pages.sba.course.course-view', compact('course', 'season'));
     }
 
     /**
@@ -106,7 +106,7 @@ class CourseController extends Controller
         $course = Course::findOrFail($course->id);
         $seasons = Season::all();
 
-        return view('pages.course.course-management', compact('course', 'seasons'));
+        return view('pages.sba.course.course-management', compact('course', 'seasons'));
     }
 
     /**
@@ -130,7 +130,7 @@ class CourseController extends Controller
 
         $course = Course::findOrFail($course->id);
 
-        return view('pages.course.cohort-assign-course', compact('course'));
+        return view('pages.sba.course.cohort-assign-course', compact('course'));
     }
 
     public function seeCourses(Request $request)
@@ -141,7 +141,7 @@ class CourseController extends Controller
             $query->where('users.id', $user);
         })->with(['cohorts'])->orderBy('order')->get();
 
-        return view('pages.course.my-courses', compact('courses', 'seasons'));
+        return view('pages.sba.course.my-courses', compact('courses', 'seasons'));
     }
 
     public function seeMyCourses(Course $mycourses)
@@ -155,21 +155,21 @@ class CourseController extends Controller
             'course_id' => $course->id,
         ]);
 
-        return view('pages.course.my-course-view', compact('course', 'season', 'materials', 'sections'));
+        return view('pages.sba.course.my-course-view', compact('course', 'season', 'materials', 'sections'));
     }
 
     public function allCourses()
     {
         $courses = Course::all();
         $seasons = Season::all();
-        return view('pages.course.all-courses', compact('courses', 'seasons'));
+        return view('pages.sba.course.all-courses', compact('courses', 'seasons'));
     }
 
     public function viewVideo($episode, $courseSection){
 
         $this->viewVideo = true;
         if ($this->viewVideo) {
-            return view('pages.course.media', [
+            return view('pages.sba.course.media', [
                 'videoUrl' => SectionMaterial::where('upload_type', 'video')->where('course_section_id',$courseSection)->get(),
             ]);
         } else {

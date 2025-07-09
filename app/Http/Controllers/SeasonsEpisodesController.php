@@ -17,7 +17,7 @@ class SeasonsEpisodesController extends Controller
         $seasons = Season::all();
         $courses = Course::all();
        
-        return view('pages.course.course',compact('seasons','courses'));
+        return view('pages.sba.course.course',compact('seasons','courses'));
     }
 
     /**
