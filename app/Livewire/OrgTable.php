@@ -157,11 +157,29 @@ public function header(): array
             Button::add('edit')
                 ->slot('Edit')
                 ->id()
-                ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
+                ->class('bg-blue-500 hover:bg-blue-800 text-white px-3 py-1 rounded cursor-pointer')
                 ->route('org.edit', ['organization' => $row->id]),
+
+            Button::add('delete')
+                ->slot('Delete')
+                ->class('bg-red-500 hover:bg-red-800 text-white px-3 py-1 rounded cursor-pointer')
+                ->dispatch('confirmDelete', ['id' => $row->id]),
         ];
     }
 
+    protected function getListeners()
+    {
+        return array_merge(
+            parent::getListeners(),
+            ['delete' => 'delete']
+        );
+    }
+
+    public function delete($id)
+    {
+        Organization::findOrFail($id)->delete();
+        $this->dispatch('swal:deleted');
+    }
     /*
     public function actionRules($row): array
     {
