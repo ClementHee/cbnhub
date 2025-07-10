@@ -49,7 +49,7 @@ new class extends Component {
                     </a>
                 </li>
                 @hasrole('Super Admin')
-                   
+
                     <li class="mt-0.5 w-full">
                         <a class="py-2.7 hover:underline focus:bg-gray-700 focus:text-white text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors"
                             href="{{ route('cohorts') }}">
@@ -107,10 +107,10 @@ new class extends Component {
                             <a href="{{ route('all-courses') }}"><span
                                     class="hover:underline ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Courses
                                     Management</span></a>
-                            <svg class="pl-1 w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 10 6">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m1 1 4 4 4-4" />
+                            <svg class="pl-1 w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="m1 1 4 4 4-4" />
                             </svg>
                         </button>
                         <ul id="dropdown-example" class="hidden py-2 ml-2">
@@ -215,7 +215,7 @@ new class extends Component {
                 <li class="w-full mt-4">
                     <h6 class="pl-6 ml-2 font-bold leading-tight uppercase text-xs opacity-60">CBN HUB</h6>
                 </li>
-                 @hasrole('Super Admin')
+                @hasrole('Super Admin')
                     <li class="mt-0.5 w-full">
                         <button aria-controls="dropdown-example" data-collapse-toggle="dropdown-reports"
                             class="w-9/10 hover:underline focus:bg-gray-700 focus:text-white py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors">
@@ -232,10 +232,10 @@ new class extends Component {
                             </div>
                             <span
                                 class="hover:underline ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Reports</span>
-                            <svg class="pl-1 w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 10 6">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="m1 1 4 4 4-4" />
+                            <svg class="pl-1 w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 4 4 4-4" />
                             </svg>
                         </button>
                         <ul id="dropdown-reports" class="hidden py-2 ml-2">
@@ -260,13 +260,33 @@ new class extends Component {
                             <li class="mt-3 w-full">
                                 <a href="{{ route('report.hdme') }}"
                                     class="ml-8 hover:underline duration-300 opacity-100 ease-soft">HDME Report</a>
-                            </li><li class="mt-3 w-full">
-                            <a href="{{ route('report.humanitarian') }}"
-                                class="ml-8 hover:underline duration-300 opacity-100 ease-soft">Humanitarian Report</a>
-                        </li>
+                            </li>
+                            <li class="mt-3 w-full">
+                                <a href="{{ route('report.humanitarian') }}"
+                                    class="ml-8 hover:underline duration-300 opacity-100 ease-soft">Humanitarian Report</a>
+                            </li>
                         </ul>
                     </li>
-                    @endhasrole
+                    <li class="mt-0.5 w-full">
+                        <a class="hover:underline focus:bg-gray-700 focus:text-white py-2.7 text-sm ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap px-4 transition-colors"
+                            href="{{ route('organizations') }}">
+                            <div
+                                class="shadow-soft-2xl mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5">
+                                <!-- Journal SVG -->
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd"
+                                        d="M4 4a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2v14a1 1 0 1 1 0 2H5a1 1 0 1 1 0-2V5a1 1 0 0 1-1-1Zm5 2a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H9Zm5 0a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-1Zm-5 4a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1H9Zm5 0a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1v-1a1 1 0 0 0-1-1h-1Zm-3 4a2 2 0 0 0-2 2v3h2v-3h2v3h2v-3a2 2 0 0 0-2-2h-2Z"
+                                        clip-rule="evenodd" />
+                                </svg>
+
+                            </div>
+                            <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Church
+                                Management</span>
+                        </a>
+                    </li>
+                @endhasrole
             </ul>
         </div>
     </aside>

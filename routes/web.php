@@ -3,6 +3,7 @@
 
 
 use App\Livewire\Auth\Login;
+use App\Models\Organization;
 use App\Http\Controllers\Dashboard;
 use App\Livewire\Auth\RegisterForm;
 use Illuminate\Support\Facades\Route;
@@ -11,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ReportController;
 use App\Http\Middleware\CheckCourseAccess;
+use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\CourseSectionsController;
 use App\Http\Controllers\SeasonsEpisodesController;
 use App\Http\Controllers\SectionMaterialController;
@@ -83,6 +85,10 @@ Route::middleware(['auth', 'superadmin'])->group(function () {
 
   Route::get('announcements', [\App\Http\Controllers\AnnouncementController::class, 'index'])->name('announcements');
   Route::get('announcements/create', [\App\Http\Controllers\AnnouncementController::class, 'create'])->name('announcement.create');
+
+  Route::get('organizations', [OrganizationController::class, 'index'])->name('organizations');
+  Route::get('create_org',[OrganizationController::class, 'create'])->name('org.create');
+  Route::get('edit_org/{organization}', [OrganizationController::class, 'edit'])->name('org.edit');
 });
 
 require __DIR__ . '/auth.php';
