@@ -89,6 +89,7 @@ Route::middleware(['auth', 'superadmin'])->group(function () {
   Route::get('organizations', [OrganizationController::class, 'index'])->name('organizations');
   Route::get('create_org',[OrganizationController::class, 'create'])->name('org.create');
   Route::get('edit_org/{organization}', [OrganizationController::class, 'edit'])->name('org.edit');
+  Route::get('view_org/{organization}', [OrganizationController::class, 'show'])->name('org.show');
 });
 
 require __DIR__ . '/auth.php';

@@ -39,6 +39,11 @@ class OrganizationController extends Controller
     public function show(Organization $organization)
     {
         //
+   
+        return view('pages.cbnhub.organization.org_form', [
+            'organization' => $organization,
+            'mode' => 'view_only'
+        ]);
     }
 
     /**

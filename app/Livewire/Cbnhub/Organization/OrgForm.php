@@ -23,6 +23,7 @@ class OrgForm extends Component
     public $synod_id;
     public $organization;
     public $update = false; // Flag to indicate if this is an update operation
+    public $mode = 'view_only'; // Default mode is editable
 
     public function mount(){
         if ($this->organization) {
@@ -43,10 +44,15 @@ class OrgForm extends Component
 
             $this->update= true; // Indicate that this is an update operation
         }
+        if($this->mode){
+            $this->mode = $this->mode; // Set the mode if provided
+
+        } 
         $this->agree_tnc = false; // Default value for agree_tnc
     }
     public function render()
     {
+     
         $provinces = DB::table('province')->get();
 
         if($this->province != null){
@@ -60,6 +66,8 @@ class OrgForm extends Component
         }else{
             $districts = DB::table('district')->get();
         }
+
+   
         return view('livewire.cbnhub.organization.org-form', [
             'provinces' => $provinces,
             'citys' => $citys,
@@ -137,11 +145,15 @@ class OrgForm extends Component
             'pastor_email' => $this->pastor_email,
             'pastor_phone' => $this->pastor_phone,
             'pastor_alt_phone' => $this->pastor_alt_phone,
-            'agree_tnc' => $this->agree_tnc,
+           
             'synod_id' => $this->synod_id,
         ]);
 
         session()->flash('message', __('Organization updated successfully.'));
         return redirect()->route('organizations');
     }
+
+   
+
+
 }

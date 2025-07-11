@@ -18,7 +18,7 @@ final class OrgTable extends PowerGridComponent
 
     public function setUp(): array
     {
-        $this->showCheckBox();
+
 
         return [
             PowerGrid::header()
@@ -50,7 +50,7 @@ public function header(): array
     public function fields(): PowerGridFields
     {
         return PowerGrid::fields()
-            ->add('id')
+       
             ->add('church_code')
             ->add('name')
             ->add('address')
@@ -71,7 +71,7 @@ public function header(): array
     public function columns(): array
     {
         return [
-            Column::make('Id', 'id'),
+ 
             Column::make('Church code', 'church_code')
                 ->sortable()
                 ->searchable(),
@@ -128,12 +128,6 @@ public function header(): array
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Created at', 'created_at_formatted', 'created_at')
-                ->sortable(),
-
-            Column::make('Created at', 'created_at')
-                ->sortable()
-                ->searchable(),
 
             Column::action('Action')
         ];
@@ -154,6 +148,17 @@ public function header(): array
     public function actions(Organization $row): array
     {
         return [
+            Button::add('generate')
+                ->slot('Generate Church Code')
+                ->id()
+                ->class('bg-green-500 hover:bg-green-800 text-white px-3 py-1 rounded cursor-pointer')
+                ->dispatch('generateChurchCode', ['id' => $row->id]),
+
+            Button::add('view')
+                ->slot('View')
+                ->id()
+                ->class('bg-green-500 hover:bg-green-800 text-white px-3 py-1 rounded cursor-pointer')
+                ->route('org.show', ['organization' => $row->id]),
             Button::add('edit')
                 ->slot('Edit')
                 ->id()
@@ -179,6 +184,16 @@ public function header(): array
     {
         Organization::findOrFail($id)->delete();
         $this->dispatch('swal:deleted');
+    }
+
+    #[\Livewire\Attributes\On('generateChurchCode')]
+    public function generateChurchCode($id)
+    {
+
+        $organization = Organization::findOrFail($id);          
+        $files =  $organization->generateChurchCode($id);
+     
+   
     }
     /*
     public function actionRules($row): array
