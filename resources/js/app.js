@@ -4,6 +4,8 @@ import './../../vendor/power-components/livewire-powergrid/dist/powergrid'
 
 import flatpickr from "flatpickr"; 
 import Swal from 'sweetalert2';
+import TomSelect from 'tom-select';
+import 'tom-select/dist/css/tom-select.css';
 
 window.addEventListener('DOMContentLoaded', () => {
     Livewire.on('confirmDelete', (data) => {

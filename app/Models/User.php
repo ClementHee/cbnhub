@@ -132,4 +132,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Announcement::class, 'author', 'id');
     }
+
+    public function organization()
+    {
+        return $this->belongsToMany(Organization::class, 'org_product');
+
+    }
 }

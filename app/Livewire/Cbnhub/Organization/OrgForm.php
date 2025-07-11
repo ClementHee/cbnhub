@@ -52,6 +52,7 @@ class OrgForm extends Component
     }
     public function render()
     {
+    
      
         $provinces = DB::table('province')->get();
 

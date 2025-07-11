@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
@@ -48,13 +49,20 @@ class Organization extends Model
         Organization::where('id', $this->id)->update([
             'church_code' => $city_code . $batch . $running_code
         ]);
- 
-        // Implement the logic to generate a unique church code
-        // This could involve checking existing codes in the database and ensuring uniqueness
-        // For example, you might use a combination of the organization name and a random number or timestamp
-        //
-
-
        
+    }
+
+    public function hasFacilitator(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function products()
+    {
+        
+        return $this->belongsToMany(Product::class, 'org_product')
+            ->withPivot('status', 'facilitator')
+            ->withTimestamps();
+
+           
     }
 }

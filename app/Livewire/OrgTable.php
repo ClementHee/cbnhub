@@ -148,6 +148,11 @@ public function header(): array
     public function actions(Organization $row): array
     {
         return [
+            Button::add('assignFaci')
+                ->slot('Assign A Facilitator')
+                ->id()
+                ->class('bg-green-500 hover:bg-green-800 text-white px-3 py-1 rounded cursor-pointer')
+                ->route('org.assign_orgpro', ['organization' => $row->id]),
             Button::add('generate')
                 ->slot('Generate Church Code')
                 ->id()

@@ -72,4 +72,12 @@ class OrganizationController extends Controller
     {
         //
     }
+
+    public function assignProductFacil(Organization $organization)
+    {
+        // This method is used to assign a product facilitator to an organization
+        return view('pages.cbnhub.organization.org_management', [
+            'organization' => $organization
+        ]);
+    }
 }

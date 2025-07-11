@@ -13,4 +13,11 @@ class Product extends Model
     {
         return $this->hasMany(Announcement::class, 'product', 'id');
     }
+
+    public function organizations()
+    {
+        return $this->hasMany(Organization::class, 'org_product')
+            ->withPivot('status', 'facilitator')
+            ->withTimestamps();
+    }
 }

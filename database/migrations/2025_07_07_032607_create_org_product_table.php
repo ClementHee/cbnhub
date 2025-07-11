@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('org_product', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('org_id')->constrained('organizations')->cascadeOnDelete();
+            $table->foreignId('organization_id')->constrained('organizations')->cascadeOnDelete();
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('status')->default('active')->nullable(); // Optional product code for the organization
             $table->timestamps();
         });
